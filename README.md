@@ -17,7 +17,21 @@ pip install requests
 
 ### Step 1: Obtain Your Meater API Key
 
-To interact with the Meater API, you need an API key. Follow the instructions in the [Meater Cloud Public REST API](https://github.com/apption-labs/meater-cloud-public-rest-api/tree/master) repository to obtain your API key.
+To interact with the Meater API, you need an API key. Follow these steps to obtain your API key:
+
+1. Open your terminal.
+2. Use the following `curl` command to get your API key:
+
+```bash
+curl --location --request POST 'https://public-api.cloud.meater.com/v1/login' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+  "email": "<MEATER Cloud Email Address>",
+  "password": "<MEATER Cloud Password>"
+}'
+```
+
+Replace `<MEATER Cloud Email Address>` and `<MEATER Cloud Password>` with your actual Meater Cloud email address and password. The response will contain your API key.
 
 ### Step 2: Set Up the Script
 
@@ -35,7 +49,7 @@ MEATER_API_URL = "https://public-api.cloud.meater.com/v1/devices"
 ACCESS_TOKEN = "<YOUR API KEY>"
 
 # Configure logging
-LOG_FILE = "/home/swanzy/meater-monitor/meater.log"
+LOG_FILE = "/<pathto>/meater.log"
 logging.basicConfig(filename=LOG_FILE, level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
 def celsius_to_fahrenheit(celsius):
@@ -80,7 +94,7 @@ if __name__ == "__main__":
 ### Step 3: Configure the Script
 
 1. Replace `<YOUR API KEY>` with your actual Meater API key.
-2. Ensure the `LOG_FILE` path is correctly set to where you want to save your log file.
+2. Replace `<pathto>` in `LOG_FILE` with the path where you want to save your log file.
 
 ### Step 4: Run the Script
 
@@ -91,9 +105,9 @@ chmod +x meater_logger.py
 ./meater_logger.py
 ```
 
-The script will log temperature data from your Meater devices every 30 seconds. Check the log file at `/home/swanzy/meater-monitor/meater.log` to see the logged data.
+The script will log temperature data from your Meater devices every 30 seconds. Check the log file at the specified path to see the logged data.
 
 ## Acknowledgements
 
 - [Meater Cloud Public REST API](https://github.com/apption-labs/meater-cloud-public-rest-api/tree/master) for providing the API access.
-- [Python Requests](https://requests.readthedocs.io/en/master/) for making HTTP requests easy.
+- [Python Requests](https://requests.readthedocs.io/en/master/)
